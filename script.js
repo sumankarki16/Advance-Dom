@@ -32,14 +32,65 @@ document.addEventListener('keydown', function (e) {
 
 
 ////////////////////////////////////////////////////
-
+/* 
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
 
-document.querySelector('.header');
+const header = document.querySelector('.header');
+
+
 const allSelections = document.querySelectorAll('.section');
 console.log(allSelections);
 
 
-// 
+// creating and inserting elements
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+message.textContent = 'We use some functionality';
+
+message.innerHTML = 'We use cookied for improved functionality amd analytics. <button class="btn btn--close-cookie">Got it!</button>';
+
+// header.prepend(message);
+header.append(message);
+
+//header.append(message.cloneNode(true));
+
+document.querySelector('.btn--close-cookie').addEventListener('click',function(){
+  message.remove();
+});
+
+
+// Style
+
+message.style.backgroundColor = '#37383d';
+message.style.width = '105%';
+ */
+
+//////////// Scroll To /////////////////
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click',function(e){
+  const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
+
+  // console.log(e.target.getBoundingClientRect());
+
+  // console.log('current scroll (X/Y)',window.scrollX,window.scrollY);
+
+
+  // window.scrollTo(s1coords.left + window.scrollX, s1coords.top + window.scrollY);
+/* 
+  window.scrollTo({
+    left: s1coords.left + window.scrollX, 
+    top: s1coords.top + window.scrollY,
+    behavior: 'smooth',
+  });
+ */
+
+  section1.scrollIntoView({behavior: 'smooth'});
+
+});
