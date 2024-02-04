@@ -9,6 +9,11 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+const nav = document.querySelector('.nav');
 
 ///////////////////////////////////////
 // Modal window
@@ -55,7 +60,7 @@ btnScrollTo.addEventListener('click',function(e){
 
 
   // window.scrollTo(s1coords.left + window.scrollX, s1coords.top + window.scrollY);
-/* 
+  /* 
   window.scrollTo({
     left: s1coords.left + window.scrollX, 
     top: s1coords.top + window.scrollY,
@@ -92,9 +97,7 @@ document.querySelector('.nav__links').addEventListener('click',function(e){
 ////////////////////////////////////////////////////
 /////////// Tabbed Component
 
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContent = document.querySelectorAll('.operations__content');
+
 
 tabsContainer.addEventListener('click',function(e){
   const clicked = e.target.closest('.operations__tab');
@@ -113,6 +116,66 @@ tabsContainer.addEventListener('click',function(e){
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 
 });
+
+////////////////////////////////////////////////////
+/////////// Menu Fade Animation
+/* 
+nav.addEventListener('mouseover', function (e){
+  if(e.target.classList.contains('nav__link')){
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = 0.5;
+    });
+    logo.style.opacity = 0.5;
+  }
+});
+
+nav.addEventListener('mouseout',function(e){
+  if(e.target.classList.contains('nav__link')){
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = 1;
+    });
+    logo.style.opacity = 1;
+  }
+});
+ */
+/* const handleHover = function(e, opacity){ */
+const handleHover = function(e){
+  
+  if(e.target.classList.contains('nav__link')){
+    const link = e.target;
+
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      /* if (el !== link) el.style.opacity = opacity; */
+      if (el !== link) el.style.opacity = this;
+    });
+    /* logo.style.opacity = opacity; */
+    logo.style.opacity = this;
+  }
+}
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+/* nav.addEventListener('mouseover',function(e){
+  handleHover(e, 0.5);
+}); */
+
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+/* nav.addEventListener('mouseout',function(e){
+  handleHover(e, 1);
+}); */
+
 
 
 
