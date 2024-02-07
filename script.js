@@ -1,5 +1,6 @@
 'use strict';
 
+const header = document.querySelector('.header');
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -176,8 +177,40 @@ nav.addEventListener('mouseout', handleHover.bind(1));
   handleHover(e, 1);
 }); */
 
+////////////////////////////////////////////////////
+/////////// Sticky Navigation
+
+/* const initialCoords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function(){
+
+if (this.window.scrollY > initialCoords.top) nav.classList.add('sticky');
+else nav.classList.remove('sticky');
 
 
+}); */
+
+
+//// Sticky navigation : Intersection Observer API
+
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver 
+(stickyNav, {
+  root: null,
+  threshold: 0,
+  // rootMargin: '-90px',
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
 
 ////////////////////////////////////////////////////
 /* 
